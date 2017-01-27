@@ -1,3 +1,4 @@
+
 class Particle
 {
   float angle;
@@ -9,9 +10,14 @@ class Particle
   Particle()
   {
     angle = 0;
-    z = - height / 2;
-    angle_speed = random(0.5, 3);
-    z_speed = random(0.5, 2);
+    angle_speed = -2;
+    z_speed = random(-0.25, 0.25);
+    z = -height / 2;
+    if(z_speed <= 0)
+    {
+      z *= -1;
+      angle_speed *= -1;
+    }
     bodyColor = color(frameCount % 255, 255, 255); 
   }
   
@@ -24,20 +30,19 @@ class Particle
   void update()
   {
     angle = (angle + angle_speed) % 360;
-    z += 0.2;
+    z += z_speed;
   }
   
   void display()
   {
     float x = 200 * cos(radians(angle));
     float y = 200 * sin(radians(angle));
-    
+    bodyColor = color(((angle / 255) * 360 + frameCount) % 255, 255, 255); 
     pushMatrix();
     translate(x, y, z);
-    bodyColor = color((angle / 360) * 255, 255, 255);
-    stroke(bodyColor);
-    noFill();
-    sphere(2);    
+    noStroke();
+    fill(bodyColor);
+    sphere(5.0);    
     popMatrix();
   }
 }

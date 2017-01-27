@@ -5,7 +5,7 @@ ArrayList<Particle> particles;
 void setup()
 {
   size(512, 512, P3D);
-  frameRate(30);
+  frameRate(60);
   colorMode(HSB);
   particles = new ArrayList<Particle>();
 }
@@ -29,7 +29,7 @@ void draw()
     p.run();
   }
   
-  saveFrame("screen-#####.png");
+  //saveFrame("screen-#####.png");
   if(frameCount > 3600)
   {
      exit();
